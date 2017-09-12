@@ -1,0 +1,61 @@
+@model IEnumerable<QualityBags.Models.Bag>
+
+@{
+    ViewData["Title"] = "Bag Management";
+}
+
+<h2>Bag Management</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Supplier</th>
+            <th>Image</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var imgUrl = @Href("~" + item.PathOfFile);
+            var errImg = @Href("~/Images/bag1.jpg");
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BagID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.Name)
+                </td>
+                <td>
+                    <img style="width: 100px; height: auto;" src="@imgUrl" alt="Bag Image" onerror="this.onerror = null; this.src = '@errImg'">
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BagID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.BagID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BagID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,84 @@
+@model QualityBags.Models.ShoppingCartViewModels.ShoppingCartViewModel
+
+@{
+    ViewData["Title"] = "Default";
+
+    var cartCount = 0;
+    foreach (var item in Model.CartItems)
+    {
+        cartCount += item.ItemCount;
+    }
+}
+
+
+<a id="cart-icon"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Shopping Cart&nbsp<span class="badge">@cartCount</span></a>
+
+<div class="cart-container">
+
+    <h4 style="color:#FF662F;"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Shopping Cart</h4>
+
+
+    @if (@Model.CartItems.Count > 0)
+    {
+        <table class="table cartTable">
+            <tr>
+                <th>ITEMS</th>
+                <th>CATEGORY</th>
+                <th>PRICE</th>
+                <th>QTY</th>
+                <th>SUBTOTAL</th>
+            </tr>
+            @foreach (var item in Model.CartItems)
+            {
+                var Subtotal = item.Bag.Price * item.ItemCount;
+                <tr>
+                    <td><a asp-action="Details" asp-controller="OrderBags" asp-route-id="@item.Bag.BagID">@item.Bag.BagID. @item.Bag.Name</a> </td>
+                    <td>@item.Bag.Category.Name</td>
+                    <td>$@item.Bag.Price</td>
+                    <td>@item.ItemCount         <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.Bag.BagID"><span class="glyphicon glyphicon-remove-circle"></span></a></td>
+                    <td>$@Subtotal</td>
+                </tr>
+            }
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>SUBTOTAL:</td>
+                <td>$@Model.SubTotal</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>GST (15%):</td>
+                <td>$@Math.Round(Model.GST, 2)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>GRAND TOTAL:</b></td>
+                <td><b>$@Math.Round(Model.GrandTotal, 2)</b></td>
+            </tr>
+        </table>
+        <div class="row">
+            <div class="col-md-offset-7">
+                <a class="btn-danger btn" style="color:white;" asp-action="ClearCart" asp-controller="ShoppingCart">
+                    Clear Cart <span class="glyphicon glyphicon-trash"></span>
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a style="color:white;" class="btn-warning btn" asp-action="Create" asp-controller="Orders">
+                    Checkout&nbsp;<i class="fa fa-credit-card" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <br />
+    }
+    else
+    {
+        <hr />
+        <h4>You have no items in your shopping cart. </h4>
+    }
+
+</div>

@@ -1,0 +1,93 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Manage your account";
+}
+
+<h2>@ViewData["Title"].</h2>
+<p class="text-success">@ViewData["StatusMessage"]</p>
+
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            <p>
+                @if (Model.HasPassword)
+            {
+                    <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Change</a>
+                }
+                else
+                {
+                    <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Create</a>
+                }
+            </p>
+        </dd>
+        <dt>Full Name:</dt>
+        <dd>
+            @if (Model.FullName != null)
+            {
+
+                <p>@Model.FullName</p>
+            }
+            else
+            {
+                <p>No Full Name Provided!</p>
+            }
+        </dd>
+        <dt>Mobile Phone Number:</dt>
+        <dd>
+            @if (Model.MobilePhoneNumber != null)
+            {
+
+                <p>@Model.MobilePhoneNumber</p>
+            }
+            else
+            {
+                <p>No Mobile Phone Number Provided!</p>
+            }
+        </dd>
+        <dt>Home Phone Number:</dt>
+        <dd>
+            @if (Model.HomePhoneNumber != null)
+            {
+
+                <p>@Model.HomePhoneNumber</p>
+            }
+            else
+            {
+                <p>No Home Phone Number Provided!</p>
+            }
+        </dd>
+        <dt>Work Phone Number:</dt>
+        <dd>
+            @if (Model.WorkPhoneNumber != null)
+            {
+
+                <p>@Model.WorkPhoneNumber</p>
+            }
+            else
+            {
+                <p>No Work Phone Number Provided!</p>
+            }
+        </dd>
+        <dt>Address:</dt>
+        <dd>
+            @if (Model.Address != null)
+            {
+
+                <p>@Model.Address</p>
+            }
+            else
+            {
+                <p>No Address Provided!</p>
+            }
+        </dd>
+        <dt>Orders:</dt>
+        <dd>
+            <p><a asp-controller="Orders" asp-action="CustomerIndex" asp-area="">View your orders</a></p>
+        </dd>
+    </dl>
+</div>
+
+

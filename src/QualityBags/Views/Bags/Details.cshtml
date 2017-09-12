@@ -1,0 +1,50 @@
+@model QualityBags.Models.Bag
+
+@{
+    ViewData["Title"] = "Bag Details";
+    var imgUrl = @Href("~" + Model.PathOfFile);
+    var errImg = @Href("~/Images/bag1.jpg");
+}
+
+<h2>Bag Details</h2>
+
+<div>
+    <h4>Bag</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BagID)
+        </dt>
+        <dd>
+            <p>@Html.DisplayFor(model => model.BagID)</p>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            <p>@Html.DisplayFor(model => model.Name)</p>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            <p>@Html.DisplayFor(model => model.Description)</p>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            <p>@Html.DisplayFor(model => model.Price)</p>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PathOfFile)
+        </dt>
+        <dd>
+            <img class="img-responsive" style="max-width: 300px;" src="@imgUrl" alt="Bag Image" onerror="this.onerror = null; this.src = '@errImg'">
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-default" asp-action="Edit" asp-route-id="@Model.BagID">Edit</a> |
+    <a class="btn btn-default" asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - QualityBags</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/myStyle.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        <link rel="apple-touch-icon" sizes="180x180" href="~/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" href="~/favicon/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="~/favicon/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="~/favicon/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="~/favicon/manifest.json">
+        <meta name="theme-color" content="#ffffff">  
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/css/myStyle.css" />
+        <link rel="apple-touch-icon" sizes="180x180" href="~/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" href="~/favicon/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="~/favicon/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="~/favicon/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="~/favicon/manifest.json">
+        <meta name="theme-color" content="#ffffff">  
+    </environment>
+    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><img style="max-height:28px" src="~/images/trans_BG.png" alt="Quality Bags" /></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="OrderBags" asp-action="Index">Product</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="Bags" asp-action="Index">Bag Management</a></li>
+                                <li><a asp-area="" asp-controller="Categories" asp-action="Index">Category Management</a></li>
+                                <li><a asp-area="" asp-controller="Suppliers" asp-action="Index">Supplier Management</a></li>
+                                <li><a asp-area="" asp-controller="Orders" asp-action="Index">Order Management</a></li>
+                                <li><a asp-area="" asp-controller="AdminApplicationUsers" asp-action="Index">Account Management</a></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-left">
+                <img src="~/images/orange_BG.png" width="180" alt="Quality Bags" />
+                <p class="footer-links">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    ·
+                    <a asp-area="" asp-controller="OrderBags" asp-action="Index">Product</a>
+                    ·
+                    <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+                    ·
+                    <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                </p>
+                <p class="footer-copyright">&copy; 2017 - Quality Bags</p>
+            </div>
+
+            <div class="footer-center">
+
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p><span>Building 183, 139 Carrington Road </span>Mt Albert, Auckland, New Zealand</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>090000000</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="mailto:support@wallstreetwines.co.nz">support@qualitybags.co.nz</a></p>
+                </div>
+
+            </div>
+
+            <div class="footer-right">
+
+                <p class="footer-designer">
+                    <span>Designer</span>
+                    Chong Wang <br /> SID: 1470225
+                </p>
+                <br>
+                <div class="footer-icons">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-tumblr"></i></a>
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </footer>  <!-- footer end-->
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/imagePreview.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/imagePreview.js"></script>
+    </environment>
+    <script>
+        $(document).ready(function () {
+            $("#cart-icon").click(function(){
+                $(".cart-container").slideToggle(500, function () {
+
+                });
+
+            })
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
